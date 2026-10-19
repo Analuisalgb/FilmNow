@@ -1,13 +1,34 @@
+import java.io.*;
 import java.util.*;
+
+/**
+ * A classe Main é a interface entre o sistema e o usuário. Possuí diversos métodos auxiliares que conectam a classe
+ * do sistema, FilmNow, com a interface do usuário.
+ *
+ * @author Ana Luísa Lopes
+ */
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         FilmNow filmNow = new FilmNow();
+        try {
+            /*
+             * Essa é a maneira de lidar com possíveis erros por falta do arquivo.
+             */
+            carregaFilmes("filmes_inicial.csv", filmNow);
+        } catch (FileNotFoundException e) {
+            System.err.println("Arquivo não encontrado: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Erro lendo arquivo: " + e.getMessage());
+        }
+
 
         while (true){
             System.out.print(menu());
+            System.out.println("");
             System.out.print("Opção> ");
-            String input = sc.nextLine().toUpperCase();
+            String input = sc.nextLine().toUpperCase().trim();
             System.out.println("");
             if (input.equals("S")){
                 break;
@@ -101,5 +122,12 @@ public class Main {
 
         System.out.println(filmNow.removerHot(pos));
         System.out.println("");
+    }
+
+    private static void carregaFilmes(String arquivoFilmes, FilmNow fn) throws FileNotFoundException, IOException {
+        LeitorFilmNow leitor = new LeitorFilmNow();
+
+        int carregados =  leitor.carregaContatos(arquivoFilmes, fn);
+        System.out.println("Carregamos " + carregados + " registros.");
     }
 }
