@@ -3,13 +3,13 @@ public class Filme {
 
     private String nome;
 
-    private int anoDeLancamento;
+    private String anoDeLancamento;
 
     private String ondeAssistir;
 
     private boolean hot;
 
-    public Filme(String nome, int anoDeLancamento, String ondeAssistir) {
+    public Filme(String nome, String anoDeLancamento, String ondeAssistir) {
         this.nome = nome;
         this.anoDeLancamento = anoDeLancamento;
         this.ondeAssistir = ondeAssistir;
@@ -31,7 +31,7 @@ public class Filme {
         return nome;
     }
 
-    public int getAnoDeLancamento() {
+    public String getAnoDeLancamento() {
         return anoDeLancamento;
     }
 
@@ -41,7 +41,7 @@ public class Filme {
         if (isHot()){
             fogo = "\uD83D\uDD25";
         }
-        return fogo + this.nome + " , " + anoDeLancamento + " , " + ondeAssistir;
+        return fogo + " " +this.nome + ", " + anoDeLancamento + ", " + ondeAssistir;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Filme {
 
         if (o instanceof Filme){
             Filme oObject = (Filme) (o);
-            if ((oObject.getNome().equals(this.nome)) &&(oObject.getAnoDeLancamento() == this.anoDeLancamento)){
+            if ((oObject.getNome().equals(this.nome)) &&(oObject.getAnoDeLancamento().equals(this.anoDeLancamento))){
                 return true;
             }
 
